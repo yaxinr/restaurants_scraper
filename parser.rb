@@ -32,3 +32,4 @@ end
 file = open('result.csv',"w")
 file.puts Restaurants.new.str("http://www.restaurants.com/listing/search/empty/where/Charlotte+NC") 
 file.close
+puts "See file result.csv"
