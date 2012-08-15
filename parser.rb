@@ -10,11 +10,7 @@ class Restaurants
       open(url)
       doc = Nokogiri::HTML(open(url))
       nexturl=doc.at_css(".rightArrow")
-      if nexturl
-        url=nexturl[:href]
-      else
-        url=nil
-      end
+      url=nexturl ? nexturl[:href] : nil
       doc.css(".listing_summary").each do |item|
         href=item.at_css(".listing_summary_header h3 a")[:href]
         title = item.at_css(".listing_summary_header h3 a").text
@@ -29,7 +25,8 @@ class Restaurants
   end
 end  
 
-file = open('result.csv',"w")
-file.puts Restaurants.new.str("http://www.restaurants.com/listing/search/empty/where/Charlotte+NC") 
-file.close
+open('result.csv',"w") do |file|
+  file.puts Restaurants.new.str("http://www.restaurants.com/listing/search/empty/where/Polson")
+  file.close
+end
 puts "See file result.csv"
