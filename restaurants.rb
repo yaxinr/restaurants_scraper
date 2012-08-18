@@ -9,10 +9,10 @@ class Restaurants < CSV
     while url
       open(url)
       doc = Nokogiri::HTML(open(url))
-      nexturl=doc.at_css('.rightArrow')
-      url=nexturl ? nexturl[:href] : nil
+      nexturl = doc.at_css('.rightArrow')
+      url = nexturl ? nexturl[:href] : nil
       doc.css('.listing_summary').each {|item|
-        href=item.at_css('.listing_summary_header h3 a')[:href]
+        href = item.at_css('.listing_summary_header h3 a')[:href]
         title = item.at_css('.listing_summary_header h3 a').text
         img = item.at_css('.listing_summary_image')[:src]
         address = item.at_css('.listing_summary_body_content_address').text.gsub(/\s+/, ' ').strip
